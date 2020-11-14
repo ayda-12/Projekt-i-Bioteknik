@@ -1,5 +1,6 @@
 % This section is for the game itself 
 % setting parameters
+
 s=10;          %(mm^3/day)^-1
 r=0.03;        %day^-1
 Tmax=1500;     %(mm^3)^-1
@@ -11,55 +12,70 @@ k2=3*10^-3;    %day^-1
 N=1400;        %#
 m=2*10^-3;     %day^-1
 t = 0:1:30;    
+
 % the function/ agents / rules
 dt = 1;
 t = 0:dt:30;
 nIterations = length(t);
+
 y1 = zeros(nIterations, 1);
 y2 = zeros(nIterations, 1);
 y3 = zeros(nIterations, 1);
 y4 = zeros(nIterations, 1);
+
 y1(1) = n2;
 y2(1) = n3;
 y3(1) = n4;
 y4(1) = n5;
+
 for i = nIterations-1
     y1(i+1) = y1(i)+ dt*(s+r*y1(i).*(1-(y1(i)+y2(i)+y3(i))/Tmax)-mu*y1(i)-k1*y4(i).*y1(i)+m*y2(i));
     y2(i+1) = y2(i)+dt*(k1*y4(i).*y1(i)-mu*y2(i)-k2*y2(i)-m*y2(i));
     y3(i+1) = y3(i)+dt*(k2*y2(i)-beta*y3(i));
     y4(i+1) = y4(i)+dt*(N*beta*y3(i)-k1*y4(i).*y1(i)-alfa*y4(i));
-%mängder för varje cell
+
+% VALUES FOR CELLS
 % 0 = empty gridcells
 % 1 = normal t-cell
 % 2 = latent t-cell
 % 3 = active t-cell
 % 4 = virus
-for i=[0]; %i=[0 1 2 3 4 5];
+
+for i = [0];                        % i = [0 1 2 3 4 5];
     a = zeros(25,25);
 for n1 = 10;
     a(randperm(numel(a), n1)) = i;
 end
 end
+
 for k=[1];
 for n2 = 10;
 a(randperm(numel(a), n2)) = k;
 end 
 end
+
 for l=[2];
 for n3 = 10; 
 a(randperm(numel(a), n3)) = l;
 end
 end
+
 for m=[3];
 for n4 = 10;
 a(randperm(numel(a), n4)) = m;
 end
 end
+
 for j=[4];
     for n5 = 5;
        a(randperm(numel(a), n5)) = j;
     end
 end
+
+
+
+% CREATE PLOTS
+
 figure(1)
 hold on
 imagesc(a)
@@ -72,8 +88,10 @@ m = y3;
 j = y4;
 end
 
-% function  
- 
+
+
+% FUNCTIONS FOR GAME
+
 function liv = celldestiny(a,x,y)
 n = neighbors(a,x,y);
 if n = n5;
@@ -85,8 +103,9 @@ probability1 = randi(2,1,1);
 if probability1 == 1
     y1 = y2;    % normal t-cell becomes latent t-cell
     y4 = 0;     % virus dies / disappears # OFWGKTA
-                % HELP HELP HELP HOW TO MAKE SURE THAT WE DONT ERASE ALL OF y4 
-                % ie. only kill the one specified t-cell and specified virus
+                % HELP HELP HELP 
+                % HOW TO MAKE SURE THAT WE DONT ERASE ALL OF y4, only targeted y4
+                % ie. only change the one specified t-cell and kill specified virus
 end
 
 
