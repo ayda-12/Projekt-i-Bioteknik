@@ -1,29 +1,5 @@
-clear	all,	close	all
-%% creating a frame of zeroes around the matrix Gameoflife.
-Gameoflife=498;
-M=round(rand(Gameoflife , Gameoflife)); %rand=random 0-1,round=avrundning
-% So now I have a 500x500 matrix of 1 (living) & 0 (dead)!
-I=zeros(1,498);
-J= zeros(500,1);
-C= cat(1,M,I);
-D= cat(1,I,C);
-E= cat(2,D,J);
-N= cat(2,J,E);  %The matrix is framed & called N 
-[R, K]= size(N);
-%% 
-%mängder för varje cell
-n1 = 5
-n2 = 10
-n3 = 50
-n4 = 100
-a(randperm(numel(a), n1)) = 1
-a(randperm(numel(a), n2)) = 2
-a(randperm(numel(a), n3)) = 3
-a(randperm(numel(a), n4)) = 4
-
-%% This section is for the game itself 
-
-%% setting parameters
+% This section is for the game itself 
+% setting parameters
 s=10;          %(mm^3/day)^-1
 r=0.03;        %day^-1
 Tmax=1500;     %(mm^3)^-1
@@ -34,38 +10,87 @@ k1=2.4*10^-5;  %mm^3/day
 k2=3*10^-3;    %day^-1
 N=1400;        %#
 m=2*10^-3;     %day^-1
-
-%%  giving the agents colors
-
-% plotroutine(A)
-function plotroutine (A)
-[m,n]=size(A);
-[x, y] = find(A);
+t = 0:1:30;    
+% the function/ agents / rules
+dt = 1;
+t = 0:dt:30;
+nIterations = length(t);
+y1 = zeros(nIterations, 1);
+y2 = zeros(nIterations, 1);
+y3 = zeros(nIterations, 1);
+y4 = zeros(nIterations, 1);
+y1(1) = n2;
+y2(1) = n3;
+y3(1) = n4;
+y4(1) = n5;
+for i = nIterations-1
+    y1(i+1) = y1(i)+ dt*(s+r*y1(i).*(1-(y1(i)+y2(i)+y3(i))/Tmax)-mu*y1(i)-k1*y4(i).*y1(i)+m*y2(i));
+    y2(i+1) = y2(i)+dt*(k1*y4(i).*y1(i)-mu*y2(i)-k2*y2(i)-m*y2(i));
+    y3(i+1) = y3(i)+dt*(k2*y2(i)-beta*y3(i));
+    y4(i+1) = y4(i)+dt*(N*beta*y3(i)-k1*y4(i).*y1(i)-alfa*y4(i));
+%mängder för varje cell
+% 0 = empty gridcells
+% 1 = normal t-cell
+% 2 = latent t-cell
+% 3 = active t-cell
+% 4 = virus
+for i=[0]; %i=[0 1 2 3 4 5];
+    a = zeros(25,25);
+for n1 = 10;
+    a(randperm(numel(a), n1)) = i;
+end
+end
+for k=[1];
+for n2 = 10;
+a(randperm(numel(a), n2)) = k;
+end 
+end
+for l=[2];
+for n3 = 10; 
+a(randperm(numel(a), n3)) = l;
+end
+end
+for m=[3];
+for n4 = 10;
+a(randperm(numel(a), n4)) = m;
+end
+end
+for j=[4];
+    for n5 = 5;
+       a(randperm(numel(a), n5)) = j;
+    end
+end
+figure(1)
 hold on
-for K = 1 : length(x)  
-    rectangle('Position', [y(K)-1, abs(x(K)-m) 1, 1], 'Linewidth', 2, 'facecolor', 'g','EdgeColor','k');
-    %making the living cells green 
-end
-[x, y] = find(A==0); % finding dead cells
-for K = 1 : length(x)  
-    rectangle('Position', [y(K)-1, abs(x(K)-m) 1, 1], 'Linewidth', 2, 'facecolor', 'w','EdgeColor','k');
-    %making the dead cells white 
-end
-for j=0:n  
-    plot([j j],[0 m],'k-','Linewidth', 2),
-end
-for i=0:m  
-    plot([0 n],[i i],'k-','Linewidth', 2)
-end
-axis equal
- drawnow
+imagesc(a)
+colormap hot
+colorbar 
+grid
+k = y1;
+l = y2;
+m = y3;
+j = y4;
 end
 
-%% the function/ agents / rules
-
-function dydt= HIV
-dydt1=s+r*T(1-(y1+y2+y3)/Tmax)-mu*y-k1*V*y1+m*y2
-dydt2=k1*V*y1-mu*y2-K2*y2-m*y2
-dydt3=k2*y2-beta*y3
-dydt4=N*beta*y3-k1*V*y1-alfa*y4
+% function  
+ 
+function liv = celldestiny(a,x,y)
+n = neighbors(a,x,y);
+if n = n5;
+    y1=y1*k1;
+probability1=randint(1,2);
+if probability1 > 4
+    
+    
+elseif antal==2
+    liv=a(x,y); % eftersom inga celler ?terupplivas n?r detr finns tv? grannar
+elseif antal==3
+    liv=1;
+else 
+    liv=0;
 end
+end
+
+% function nrs = neighbours(a,x,y)
+% nrs = a(x-1,y-1)+a(x-1,y)+a(x-1,y+1)+a(x,y-1)+a(x,y+1)+a(x+1,y-1)+a(x+1,y)+a(x+1,y+1);
+% end
