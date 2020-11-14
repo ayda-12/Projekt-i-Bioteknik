@@ -48,13 +48,13 @@ for n1 = 10;
 end
 end
 
-for k=[1];
+for k = [1];
 for n2 = 10;
 a(randperm(numel(a), n2)) = k;
 end 
 end
 
-for l=[2];
+for l = [2];
 for n3 = 10; 
 a(randperm(numel(a), n3)) = l;
 end
@@ -92,11 +92,54 @@ end
 
 % FUNCTIONS FOR GAME
 
+% function for all of cell destiny
+% first id which cell we are deciding the fate of *evil laugh*
+% dep on value of the neighbors of a cell
+% what whill happen dep on these neighbor values
+% here we define the rules for cell destiny
+% ie. when does a cell:
+% die? convert? *evil laugh in Danish*
+
+% QUESTIONS to be answered 
+% how many parts / loops does the function need?
+% do we need multiple functions? prob not
+% how do we make it as short / concise / fast as possible? 
+% # minimize computational power required # why don't we try MORE power?!
+% how to specify only modifying the value of ONE CELL at a time?
+
+% if cell is interacting with two neighboring cells: 
+% different interaction? 
+% increaed probability of infection?
+% how to determine the fate of virus loving cells?
+% use the values (ie virus = 4) to det this! 
+
+% how to represent probabilities?
+% how to implement values for k1, k2... etc?
+% how realistic is this compared to infections IRL?
+
+% what is a sustainable amount of virus in body?
+% ie. when does the whole organism die?
+% ie. when does the whole organism die?
+% ie. when does the whole organism die?
+% UPPER THRESHOLD VALUE FOR DEATH BY HIV VIRUAL INFECITON % value = over 9000
+% LOWER THRESHOLD VALUE FOR "RECOVERY" FROM HIV INFECITON % value =! 0 =/= 
+% ie. is not ever equal to zero because this is biologically impossible rip
+
+% BRAINSTORMING PROBABILITIES
+% if one virus --> 10 percent risk for infecting t-cells
+% then 
+% if multiple virus arround t-cell --> higher risk for infeciton 
+
+
+
+
+
 function liv = celldestiny(a,x,y)
 n = neighbors(a,x,y);
-if n = n5;
-    y1=y1*k1;
-    
+% if n = n5;
+    y1 = y1*k1;
+
+% first probability for changing 
 probability1 = randi(2,1,1);     
     % a 50 percent probablity represented by genereation of random integer either 1 or 2
     % value of probability1 returns an int 
