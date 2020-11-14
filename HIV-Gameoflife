@@ -78,7 +78,7 @@ function liv = celldestiny(a,x,y)
 n = neighbors(a,x,y);
 if n = n5;
     y1=y1*k1;
-probability1=randint(1,2);
+probability1=randi(1,2);
 if probability1 > 4
     
     
