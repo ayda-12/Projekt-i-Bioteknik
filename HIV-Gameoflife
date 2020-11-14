@@ -78,10 +78,18 @@ function liv = celldestiny(a,x,y)
 n = neighbors(a,x,y);
 if n = n5;
     y1=y1*k1;
-probability1=randi(1,2);
-if probability1 > 4
     
-    
+probability1 = randi(2,1,1);     
+    % a 50 percent probablity represented by genereation of random integer either 1 or 2
+    % value of probability1 returns an int 
+if probability1 == 1
+    y1 = y2;    % normal t-cell becomes latent t-cell
+    y4 = 0;     % virus dies / disappears # OFWGKTA
+                % HELP HELP HELP HOW TO MAKE SURE THAT WE DONT ERASE ALL OF y4 
+                % ie. only kill the one specified t-cell and specified virus
+end
+
+
 elseif antal==2
     liv=a(x,y); % eftersom inga celler ?terupplivas n?r detr finns tv? grannar
 elseif antal==3
