@@ -139,7 +139,8 @@ n = neighbors(a,x,y);
 % if n = n5;
     y1 = y1*k1;
 
-% first probability for changing 
+% first probability for changing of t-cells
+
 probability1 = randi(2,1,1);     
     % a 50 percent probablity represented by genereation of random integer either 1 or 2
     % value of probability1 returns an int 
@@ -164,3 +165,8 @@ end
 % function nrs = neighbours(a,x,y)
 % nrs = a(x-1,y-1)+a(x-1,y)+a(x-1,y+1)+a(x,y-1)+a(x,y+1)+a(x+1,y-1)+a(x+1,y)+a(x+1,y+1);
 % end
+
+
+
+
+
