@@ -1,6 +1,5 @@
 % This section is for the game itself 
 % setting parameters
-
 s=10;          %(mm^3/day)^-1
 r=0.03;        %day^-1
 Tmax=1500;     %(mm^3)^-1
@@ -18,23 +17,27 @@ dt = 1;
 t = 0:dt:30;
 nIterations = length(t);
 
+%vectors for ploting
 y0 = zeros(nIterations, 1);
 y1 = zeros(nIterations, 1);
 y2 = zeros(nIterations, 1);
 y3 = zeros(nIterations, 1);
 y4 = zeros(nIterations, 1);
 
+%intial values
 y0(1) = n1;
 y1(1) = n2;
 y2(1) = n3;
 y3(1) = n4;
 y4(1) = n5;
 
+%Functions
 for i = nIterations-1
     y1(i+1) = y1(i)+ dt*(s+r*y1(i).*(1-(y1(i)+y2(i)+y3(i))/Tmax)-mu*y1(i)-k1*y4(i).*y1(i)+m*y2(i));
     y2(i+1) = y2(i)+dt*(k1*y4(i).*y1(i)-mu*y2(i)-k2*y2(i)-m*y2(i));
     y3(i+1) = y3(i)+dt*(k2*y2(i)-beta*y3(i));
     y4(i+1) = y4(i)+dt*(N*beta*y3(i)-k1*y4(i).*y1(i)-alfa*y4(i));
+    end
 
 % VALUES FOR CELLS
 % 0 = empty gridcells
@@ -43,6 +46,7 @@ for i = nIterations-1
 % 3 = active t-cell
 % 4 = virus
 
+% CREATE PLOTS
 for i = [0];                        % i = [0 1 2 3 4 5];
     a = zeros(25,25);
 for n1 = 10;
@@ -77,7 +81,6 @@ end
 
 
 % CREATE PLOTS
-
 figure(1)
 hold on
 imagesc(a)
@@ -90,50 +93,7 @@ m = y3;
 j = y4;
 end
 
-
-
-% FUNCTIONS FOR GAME
-
-% function for all of cell destiny
-% first id which cell we are deciding the fate of *evil laugh*
-% dep on value of the neighbors of a cell
-% what whill happen dep on these neighbor values
-% here we define the rules for cell destiny
-% ie. when does a cell:
-% die? convert? *evil laugh in Danish*
-
-% QUESTIONS to be answered 
-% how many parts / loops does the function need?
-% do we need multiple functions? prob not
-% how do we make it as short / concise / fast as possible? 
-% # minimize computational power required # why don't we try MORE power?!
-% how to specify only modifying the value of ONE CELL at a time?
-
-% if cell is interacting with two neighboring cells: 
-% different interaction? 
-% increaed probability of infection?
-% how to determine the fate of virus loving cells?
-% use the values (ie virus = 4) to det this! 
-
-% how to represent probabilities?
-% how to implement values for k1, k2... etc?
-% how realistic is this compared to infections IRL?
-
-% what is a sustainable amount of virus in body?
-% ie. when does the whole organism die?
-% ie. when does the whole organism die?
-% ie. when does the whole organism die?
-% UPPER THRESHOLD VALUE FOR DEATH BY HIV VIRUAL INFECITON % value = over 9000
-% LOWER THRESHOLD VALUE FOR "RECOVERY" FROM HIV INFECITON % value =! 0 =/= 
-% ie. is not ever equal to zero because this is biologically impossible rip
-
-% BRAINSTORMING PROBABILITIES
-% if one virus --> 10 percent risk for infecting t-cells
-% then 
-% if multiple virus arround t-cell --> higher risk for infeciton 
-
-
-
+%neighbours
 function pos = neighbours(a,x,y)
 pos1 = a(x-1,y-1);
 pos2 = a(x-1,y);
@@ -153,7 +113,6 @@ q = [0,0.00001,1]
 
 if pos9=y1 && pos1=y4 && rand(q)>=k1;
 pos9 = y2 && pos1=0;
-
 elseif 
 pos9=y1;
 end
@@ -208,6 +167,7 @@ pos9=y1;
 end
 end
 
+%%
 
 n = neighbors(a,x,y); 
 % if n = n5;
@@ -235,9 +195,5 @@ else
     liv=0;
 end
 end
-
-
-
-
 
 
