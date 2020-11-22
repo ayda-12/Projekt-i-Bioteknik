@@ -144,71 +144,60 @@ pos8 = a(x+1,y+1);
 pos9=a(x,y);
 end
 
+q = [0,0.00001,1]
 
 function Infect = celldestiny(a,x,y)
-if pos9=y1;
-if pos1=y4;
+%pos1||pos2||pos3||pos4||pos5||pos6||pos7||pos8=y4 &&
+if pos9=y1 && rand(q)>=k1 
 pos9 = y2;
 elseif 
 pos9=y1;
 end
 end
-if pos9=y1;
-if pos2=y4;
+end
+if pos9=y1 && pos2=y4;
 pos9 = y2;
 elseif 
 pos9=y1;
 end
 end
-if pos9=y1;
-if pos3=y4;
+if pos9=y1 && pos3=y4;
 pos9 = y2;
 elseif 
 pos9=y1;
 end
 end
-if pos9=y1;
-if pos4=y4;
+if pos9=y1 && pos4=y4;
 pos9 = y2;
 elseif 
 pos9=y1;
 end
 end
-if pos9=y1;
-if pos5=y4;
+if pos9=y1 && pos5=y4;
 pos9 = y2;
 elseif 
 pos9=y1;
 end
 end
-if pos9=y1;
-if pos6=y4;
+if pos9=y1 && pos6=y4;
 pos9 = y2;
 elseif 
 pos9=y1;
 end
 end
-if pos9=y1;
-if pos7=y4;
+if pos9=y1 && pos7=y4;
 pos9 = y2;
 elseif 
 pos9=y1;
 end
 end
-if pos9=y1;
-if pos8=y4;
+if pos9=y1 && pos8=y4;
 pos9 = y2;
 elseif 
 pos9=y1;
 end
 end
-if pos9=y1;
-if pos8=y4;
-pos9 = y2;
-elseif 
-pos9=y1;
-end
-end
+
 
 n = neighbors(a,x,y); 
 % if n = n5;
