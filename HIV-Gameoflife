@@ -132,10 +132,85 @@ end
 
 
 
+function pos = neighbours(a,x,y)
+pos1 = a(x-1,y-1);
+pos2 = a(x-1,y);
+pos3 = a(x-1,y+1);
+pos4 = a(x,y-1);
+pos5 = a(x,y+1);
+pos6 = a(x+1,y-1);
+pos7 = a(x+1,y);
+pos8 = a(x+1,y+1);
+pos9=a(x,y);
+end
 
 
-function liv = celldestiny(a,x,y)
-n = neighbors(a,x,y);
+function Infect = celldestiny(a,x,y)
+if pos9=y1;
+if pos1=y4;
+pos9 = y2;
+elseif 
+pos9=y1;
+end
+end
+if pos9=y1;
+if pos2=y4;
+pos9 = y2;
+elseif 
+pos9=y1;
+end
+end
+if pos9=y1;
+if pos3=y4;
+pos9 = y2;
+elseif 
+pos9=y1;
+end
+end
+if pos9=y1;
+if pos4=y4;
+pos9 = y2;
+elseif 
+pos9=y1;
+end
+end
+if pos9=y1;
+if pos5=y4;
+pos9 = y2;
+elseif 
+pos9=y1;
+end
+end
+if pos9=y1;
+if pos6=y4;
+pos9 = y2;
+elseif 
+pos9=y1;
+end
+end
+if pos9=y1;
+if pos7=y4;
+pos9 = y2;
+elseif 
+pos9=y1;
+end
+end
+if pos9=y1;
+if pos8=y4;
+pos9 = y2;
+elseif 
+pos9=y1;
+end
+end
+if pos9=y1;
+if pos8=y4;
+pos9 = y2;
+elseif 
+pos9=y1;
+end
+end
+
+n = neighbors(a,x,y); 
 % if n = n5;
     y1 = y1*k1;
 
@@ -162,9 +237,6 @@ else
 end
 end
 
-% function nrs = neighbours(a,x,y)
-% nrs = a(x-1,y-1)+a(x-1,y)+a(x-1,y+1)+a(x,y-1)+a(x,y+1)+a(x+1,y-1)+a(x+1,y)+a(x+1,y+1);
-% end
 
 
 
