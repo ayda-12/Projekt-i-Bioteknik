@@ -111,6 +111,13 @@ q = [0,0.00001,1]
 % function Infect = celldestiny(a,x,y)
 % pos1||pos2||pos3||pos4||pos5||pos6||pos7||pos8=y4 &&
 
+
+
+y1=1
+y2=2
+y3=3
+y4=4
+
 if pos9=y1 && pos1=y4 && rand(q)>=k1;
 pos9 = y2 && pos1=0;
 elseif 
