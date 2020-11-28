@@ -98,15 +98,24 @@ end
 
 for n+1
 
-% 0->T
-[x,y]=find(a==0) %find out the positions of the 2 in the matrix a 
-T=[x,y] %save all the positions in a matrix 
-q=randsample (1:length(T),s) % randomly extract z positions from TL. This is done by randomly choosing one row from the a matrix
+% 0->T lymphatic system
+[x1,j1]=find(a==0) %find out the positions of the 2 in the matrix a 
+T=[x1,j1] %save all the positions in a matrix 
+q1=randsample (1:length(T),s) % randomly extract z positions from TL. This is done by randomly choosing one row from the a matrix
 subst=[]
-for i =q
-subst=[subst;(x(i),:];
+for i =q1
+subst=[subst;(T(i),:];
 end
 a(sub2ind(size(a),subst(:,1),subst(:,2)))=1
+
+
+[x2,j2]=find(a==1)
+T=[x2,j2]
+for j=[1];
+    for n5 =round((size(T))*0.03);
+       a(randperm(numel(a), n5)) = j;
+    end
+end
 
 %neighbours
 function pos = neighbours(a,x,y)
@@ -185,24 +194,24 @@ end
 end
 
 % TL->TA
-[x1,j1]=find(a==2) %find out the positions of the 2 in the matrix a 
-TL=[x,y] %save all the positions in a matrix 
+[x3,j3]=find(a==2) %find out the positions of the 2 in the matrix a 
+TL=[x3,j3] %save all the positions in a matrix 
 z=round(size(TL)/2)
-q=randsample (1:length(TL),z) % randomly extract z positions from TL. This is done by randomly choosing one row from the a matrix
+q3=randsample (1:length(TL),z) % randomly extract z positions from TL. This is done by randomly choosing one row from the a matrix
 subst=[]
-for i =q
-subst=[subst;(x(i),:];
+for i =q3
+subst=[subst;(TL(i),:];
 end
 a(sub2ind(size(a),subst(:,1),subst(:,2)))=3
 
 % TA-> Virus
-[x2,j2]=find(a==3) %find out the positions of the 2 in the matrix a 
-TA=[i,j]
+[x4,j4]=find(a==3) %find out the positions of the 2 in the matrix a 
+TA=[x4,j4]
 r=round(size(TA)/100)
-w=randsample (1:length(TA),r) 
+q4=randsample (1:length(TA),r) 
 subst=[]
-for i=w
-subst=[subst;(i(i),:];
+for i=q4
+subst=[subst;(TA(i),:];
 end
 a(sub2ind(size(a),subst(:,1),subst(:,2)))=0
 
@@ -213,16 +222,15 @@ for j=[4];
 end
 
 % Virus-> 0
-[x3,j3]=find(a==4) %find out the positions of the 4 in the matrix a 
-V=[x3,j3]
+[x5,j5]=find(a==4) %find out the positions of the 4 in the matrix a 
+V=[x5,j5]
 r2=round(size(V)/10)
-w2=randsample (1:length(TA),r2) 
+q5=randsample (1:length(TA),r2) 
 subst=[]
-for i=w2
-subst=[subst;(i(i),:];
+for i=q5
+subst=[subst;(V(i),:];
 end
 a(sub2ind(size(a),subst(:,1),subst(:,2)))=0
-
 
 end
 
