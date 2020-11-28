@@ -1,43 +1,45 @@
+%% This section is for the game itself 
 % This section is for the game itself 
 % setting parameters
-s=10;          %(mm^3/day)^-1
-r=0.03;        %day^-1
-Tmax=1500;     %(mm^3)^-1
-mu=0.02;       %day^-1
-beta=0.24;     %day^-1 TA dör
-alfa=2.4;      %day^-1 free virus death rate
-k1=2.4*10^-5;  %mm^3/day
-k2=3*10^-3;    %day^-1
-N=1400;        %#
-m=2*10^-3;     %day^-1
-t = 0:1:30;    
-
-% the function/ agents / rules
-dt = 1;
-t = 0:dt:30;
-nIterations = length(t);
-
-%vectors for ploting
-y0 = zeros(nIterations, 1);
-y1 = zeros(nIterations, 1);
-y2 = zeros(nIterations, 1);
-y3 = zeros(nIterations, 1);
-y4 = zeros(nIterations, 1);
-
-%intial values
-y0(1) = n1;
-y1(1) = n2;
-y2(1) = n3;
-y3(1) = n4;
-y4(1) = n5;
-
-%Functions
-%for i = nIterations-1
-    %y1(i+1) = y1(i)+ dt*(s+r*y1(i).*(1-(y1(i)+y2(i)+y3(i))/Tmax)-mu*y1(i)-k1*y4(i).*y1(i)+m*y2(i));
-    %y2(i+1) = y2(i)+dt*(k1*y4(i).*y1(i)-mu*y2(i)-k2*y2(i)-m*y2(i));
-    %y3(i+1) = y3(i)+dt*(k2*y2(i)-beta*y3(i));
-    %y4(i+1) = y4(i)+dt*(N*beta*y3(i)-k1*y4(i).*y1(i)-alfa*y4(i));
-    %end
+s=10;          %T-cell from precursor supply rate ((mm^3/day)^-1 )
+r=0.03;        %normal T-cell growth rate (day^-1)
+Tmax=1500;     %maximum T-cell population ((mm^3)^-1)
+mu=0.02;       %normal/latently infected T-cell death rate (day^-1)
+beta=0.24;     %actively infected T-cell death rate (day^-1)
+alfa=2.4;      %free virus death rate (day^-1)
+k1=2.4*10^-5;  %T-cell infection rate by free virus (mm^3/day)
+k2=3*10^-3;    %latent-to-active T-cell conversion rate (day^-1)
+N=1400;        %virus produced by an active T-cell (#)
+m=2*10^-3;     %latent-to-normal T-cell conversion rate (day^-1)
+% t = 0:1:30;    
+% 
+% % the function/ agents / rules
+% dt = 1;
+% t = 0:dt:30;
+% nIterations = length(t);
+% 
+% %vectors for ploting
+% 0 = zeros(nIterations, 1);
+% 1 = zeros(nIterations, 1);
+% 2 = zeros(nIterations, 1);
+% 3 = zeros(nIterations, 1);
+% 4 = zeros(nIterations, 1);
+% 
+% %intial values
+% 0(1) = n1;
+% 1(1) = n2;
+% 2(1) = n3;
+% 3(1) = n4;
+% 4(1) = n5;
+% 
+% %Functions
+% for i = nIterations-1
+%     1(i+1) = 1(i)+ dt*(s+r*1(i).*(1-(1(i)+2(i)+3(i))/Tmax)-mu*1(i)-k1*4(i).*1(i)+m*2(i));
+%     2(i+1) = 2(i)+dt*(k1*4(i).*1(i)-mu*2(i)-k2*2(i)-m*2(i));
+%     3(i+1) = 3(i)+dt*(k2*2(i)-beta*3(i));
+%     4(i+1) = 4(i)+dt*(N*beta*3(i)-k1*4(i).*1(i)-alfa*4(i));
+%     end
+% 
 
 % VALUES FOR CELLS
 % 0 = empty gridcells
@@ -46,42 +48,38 @@ y4(1) = n5;
 % 3 = active t-cell
 % 4 = virus
 
-y1=1
-y2=2
-y3=3
-y4=4
-
 % CREATE PLOTS
-for i = [0];                        % i = [0 1 2 3 4 5];
+for i = 0                      % i = [0 1 2 3 4 5];
     a = zeros(25,25);
-for n1 = 10;
+for n1 = 10
     a(randperm(numel(a), n1)) = i;
 end
 end
 
-for k = [1];
-for n2 = 10;
+for k = 1
+for n2 = 10
 a(randperm(numel(a), n2)) = k;
 end 
 end
 
-for l = [2];
-for n3 = 10; 
-a(randperm(numel(a), n3)) = l;
+for l = 2
+for n3 = 10
+a(randperm(numel(a), n3)) = l; %For example, randperm(6) might be [2 4 5 6 1 3].
 end
 end
 
-for m=[3];
-for n4 = 10;
+for m=3
+for n4 = 10
 a(randperm(numel(a), n4)) = m;
 end
 end
 
-for j=[4];
-    for n5 = 5;
+for j=4
+    for n5 = 5
        a(randperm(numel(a), n5)) = j;
     end
 end
+
 
 % CREATE PLOTS
 figure(1)
@@ -89,36 +87,36 @@ hold on
 imagesc(a)
 colormap hot
 colorbar 
-grid
-k = y1;
-l = y2;
-m = y3;
-j = y4;
-end
+% grid
+i = 0; 
+k = 1;
+l = 2;
+m = 3;
+j = 4;
+n = 0;
 
-for n+1
+for n = n+1
 
 % 0->T lymphatic system
-[x1,j1]=find(a==0) %find out the positions of the 2 in the matrix a 
-T=[x1,j1] %save all the positions in a matrix 
-q1=randsample (1:length(T),s) % randomly extract z positions from TL. This is done by randomly choosing one row from the a matrix
-subst=[]
-for i =q1
-subst=[subst;(T(i),:];
+[x1,j1]=find(a==0); %find out the positions of the 2 in the matrix a 
+T=[x1,j1]; %save all the positions in a matrix 
+q1=randsample (1:length(T),s); % randomly extract z positions from TL. This is done by randomly choosing one row from the a matrix
+subst1=[];
+for i = q1
+Subst1=[subst1;T(i,:)];
 end
-a(sub2ind(size(a),subst(:,1),subst(:,2)))=1
+a(sub2ind(size(a),Subst1(:,1),Subst1(:,2)))=1;
 
 
-[x2,j2]=find(a==1)
-T=[x2,j2]
-for j=[1];
-    for n5 =round((size(T))*0.03);
+[x2,j2]=find(a==1);
+T=[x2,j2];
+for j = 1
+    for n5 =round((size(T))*0.03)
        a(randperm(numel(a), n5)) = j;
     end
 end
-
-%neighbours
-function pos = neighbours(a,x,y)
+%% %% neighbours
+[x,y]= size(a);
 pos1 = a(x-1,y-1);
 pos2 = a(x-1,y);
 pos3 = a(x-1,y+1);
@@ -127,143 +125,148 @@ pos5 = a(x,y+1);
 pos6 = a(x+1,y-1);
 pos7 = a(x+1,y);
 pos8 = a(x+1,y+1);
-pos9=a(x,y);
-end
+pos9 =  a(x,y); 
+q = [0,0.001,1]; 
+% function pos = neighbours(a,x,y)
+% pos= [pos1,pos2,pos3,pos4,pos5, pos6, pos7, pos8, pos9]; 
 
-q = [0,0.00001,1]
+% end
+
+
 
 % function Infect = celldestiny(a,x,y)
-% pos1||pos2||pos3||pos4||pos5||pos6||pos7||pos8=y4 &&
+% pos1||pos2||pos3||pos4||pos5||pos6||pos7||pos8=4 &&
 
-
-% T->TL
-if pos9=y1 && pos1=y4 && rand(q)>=k1;
-pos9 = y2 && pos1=0;
-elseif 
-pos9=y1;
-end
+if pos9 == 1 && pos1 == 4 && rand(q)>=k1    %bestäm k1
+pos9 = 2;
+pos1 = 0;
+else
+pos9 = 1;
 end
 
-if pos9=y1 && pos2=y4 && rand(q)>=k1;
-pos9 = y2  && pos2=0;
-elseif 
-pos9=y1;
-end
-end
-
-if pos9=y1 && pos3=y4 && rand(q)>=k1;
-pos9 = y2 && pos3=0;
-elseif 
-pos9=y1;
-end
+if pos9 == 1 && pos2 == 4 && rand(q) >= k1
+pos9 = 2;
+pos2 = 0;
+else 
+pos9 = 1;
 end
 
-if pos9=y1 && pos4=y4 && rand(q)>=k1;
-pos9 = y2 && pos4=0;
-elseif 
-pos9=y1;
-end
+
+if pos9 == 1 && pos3 == 4 && rand(q)>=k1
+pos9 = 2;
+pos3=0;
+else 
+pos9=1;
 end
 
-if pos9=y1 && pos5=y4 && rand(q)>=k1;
-pos9 = y2 && pos5=0;
-elseif 
-pos9=y1;
-end
+
+if pos9 == 1 && pos4 == 4 && rand(q)>=k1
+pos9 = 2;
+pos4=0;
+else 
+pos9=1;
 end
 
-if pos9=y1 && pos6=y4 && rand(q)>=k1;
-pos9 = y2 && pos6=0;
-elseif 
-pos9=y1;
-end
+
+if pos9 == 1 && pos5 == 4 && rand(q)>=k1
+pos9 = 2;
+pos5 = 0;
+else 
+pos9=1;
 end
 
-if pos9=y1 && pos7=y4 && rand(q)>=k1;
-pos9 = y2 && pos7=0;
-elseif 
-pos9=y1;
-end
+
+if pos9 == 1 && pos6 == 4 && rand(q)>=k1
+pos9 = 2;
+pos6 = 0;
+else 
+pos9=1;
 end
 
-if pos9=y1 && pos8=y4 && rand(q)>=k1;
-pos9 = y2 && pos8=0;
-elseif 
-pos9=y1;
+
+if pos9 == 1 && pos7 == 4 && rand(q)>=k1
+pos9 = 2;
+pos7 = 0;
+else 
+pos9=1;
 end
+
+
+if pos9 == 1 && pos8 == 4 && rand(q)>=k1
+pos9 = 2;
+pos8 = 0;
+else 
+pos9=1;
 end
+
 
 % TL->TA
-[x3,j3]=find(a==2) %find out the positions of the 2 in the matrix a 
-TL=[x3,j3] %save all the positions in a matrix 
-z=round(size(TL)/2)
-q3=randsample (1:length(TL),z) % randomly extract z positions from TL. This is done by randomly choosing one row from the a matrix
-subst=[]
+[x3,j3]=find(a==2); %find out the positions of the 2 in the matrix a 
+TL=[x3,j3]; %save all the positions in a matrix 
+z=round(size(TL)/2);
+q3=randsample (1:length(TL),z);  % randomly extract z positions from TL. This is done by randomly choosing one row from the a matrix
+subst3=[];
 for i =q3
-subst=[subst;(TL(i),:];
+Subst3=[subst3;TL(i,:)];
 end
-a(sub2ind(size(a),subst(:,1),subst(:,2)))=3
+a(sub2ind(size(a),Subst3(:,1),Subst3(:,2))) = 3; 
 
 % TA-> Virus
-[x4,j4]=find(a==3) %find out the positions of the 2 in the matrix a 
-TA=[x4,j4]
-r=round(size(TA)/100)
-q4=randsample (1:length(TA),r) 
-subst=[]
+[x4,j4]=find(a==3);  %find out the positions of the 2 in the matrix a 
+TA=[x4,j4]; 
+r=round(size(TA)/100);
+q4=randsample (1:length(TA),r); 
+subst4=[];
 for i=q4
-subst=[subst;(TA(i),:];
+Subst4=[subst4;TA(i,:)];
 end
-a(sub2ind(size(a),subst(:,1),subst(:,2)))=0
+a(sub2ind(size(a),Subst4(:,1),Subst4(:,2))) = 0; 
 
-for j=[4];
-    for e = (r*100) ;    % ändra 100 sen
+for j = 4
+    for e = (r*100)     % ändra 100 sen
        a(randperm(numel(a), e)) = j;
     end
 end
 
 % Virus-> 0
-[x5,j5]=find(a==4) %find out the positions of the 4 in the matrix a 
-V=[x5,j5]
-r2=round(size(V)/10)
-q5=randsample (1:length(TA),r2) 
-subst=[]
+[x5,j5]=find(a==4);  %find out the positions of the 4 in the matrix a 
+V=[x5,j5];
+r2=round(size(V)/10);  
+q5=randsample (1:length(TA),r2); 
+subst5=[];
 for i=q5
-subst=[subst;(V(i),:];
+Subst5=[subst5;V(i,:)];
 end
-a(sub2ind(size(a),subst(:,1),subst(:,2)))=0
+a(sub2ind(size(a),Subst5(:,1),Subst5(:,2)))= 0;
 
-end
-
-
-
-
-%%
-
-n = neighbors(a,x,y); 
-% if n = n5;
-    y1 = y1*k1;
-
-% first probability for changing of t-cells
-
-probability1 = randi(2,1,1);     
-    % a 50 percent probablity represented by genereation of random integer either 1 or 2
-    % value of probability1 returns an int 
-if probability1 == 1
-    y1 = y2;    % normal t-cell becomes latent t-cell
-    y4 = 0;     % virus dies / disappears # OFWGKTA
-                % HELP HELP HELP 
-                % HOW TO MAKE SURE THAT WE DONT ERASE ALL OF y4, only targeted y4
-                % ie. only change the one specified t-cell and kill specified virus
 end
 
-
-elseif antal==2
-    liv=a(x,y); % eftersom inga celler ?terupplivas n?r detr finns tv? grannar
-elseif antal==3
-    liv=1;
-else 
-    liv=0;
-end
-end
+% Till nästa gång => integrera m, kolla upp periodisk skiten. 
+% n = neighbors(a,x,y); 
+% % if n = n5;
+%     1 = 1*k1;
+% 
+% % first probability for changing of t-cells
+% 
+% probabilit1 = randi(2,1,1);     
+%     % a 50 percent probablity represented by genereation of random integer either 1 or 2
+%     % value of probabilit1 returns an int 
+% if probabilit1 == 1
+%     1 = 2;    % normal t-cell becomes latent t-cell
+%     4 = 0;     % virus dies / disappears # OFWGKTA
+%                 % HELP HELP HELP 
+%                 % HOW TO MAKE SURE THAT WE DONT ERASE ALL OF 4, only targeted 4
+%                 % ie. only change the one specified t-cell and kill specified virus
+% end
+% 
+% 
+% else antal==2
+%     liv=a(x,y); % eftersom inga celler ?terupplivas n?r detr finns tv? grannar
+% else antal==3
+%     liv=1;
+% else 
+%     liv=0;
+% end
+% end
 
 
