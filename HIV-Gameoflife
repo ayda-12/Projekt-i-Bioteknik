@@ -270,7 +270,25 @@ end
 % end
 % end
 
-
+function summa	=	antalgrannar(A,r,k)
+[m,n]=size(A)
+			
+if r==1	&&	k==1	summa=A(r+1,k)+A(r,k+1)+A(r+1,k+1)
+elseif r==m	&&	k==1	summa=A(r-1,k)+A(r,k+1)+A(r-1,k+1)
+elseif r==1	&&	k==n		summa=A(r,k-1)+A(r+1,k)+A(r+1,k-1)
+elseif r==m	&&	k==n	summa=A(r,k-1)+A(r-1,k)+A(r-1,k-1)
+			
+elseif r==1	&&	k>1	&&	k<n	summa=A(r,k-1)+A(r+1,k-1)+A(r+1,k)+A(r+1,k+1)+A(r,k+1)
+			
+elseif r==m	&&	k>1	&&	k<n	summa=A(r,k-1)+A(r-1,k-1)+A(r-1,k)+A(r-1,k+1)+A(r,k+1)
+			
+elseif r>1	&&	r<m	&&	k==1	summa=	A(r-1,k)+A(r-1,k+1)+A(r,k+1)+A(r+1,k+1)+A(r+1,k)
+			
+elseif r>1	&&	r<m	&&	k==n	summa=A(r-1,k)+A(r-1,k-1)+A(r,k-1)+A(r+1,k-1)+A(r+1,k)
+			
+else summa	=	A(r+1,k-1)+A(r+1,k+1)+A(r-1,k-1)+A(r-1,k+1)+A(r,k-1)+A(r,k+1)+A(r+1,k)+A(r-1,k)
+end
+end
 
 
 
