@@ -270,10 +270,11 @@ end
 % end
 % end
 
-function summa	=	antalgrannar(A,r,k)
-[m,n]=size(A)
+function Pos	=	Granne(a,r,k)
+[m,n]=size(a)
 			
-if r==1	&&	k==1	summa=A(r+1,k)+A(r,k+1)+A(r+1,k+1)
+if r==1	&&	k==1    
+Pos = A(r+1,k) | A(r,k+1) | A(r+1,k+1)
 elseif r==m	&&	k==1	summa=A(r-1,k)+A(r,k+1)+A(r-1,k+1)
 elseif r==1	&&	k==n		summa=A(r,k-1)+A(r+1,k)+A(r+1,k-1)
 elseif r==m	&&	k==n	summa=A(r,k-1)+A(r-1,k)+A(r-1,k-1)
