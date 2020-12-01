@@ -49,13 +49,26 @@ m=2*10^-3;     %latent-to-normal T-cell conversion rate (day^-1)
 % 3 = active t-cell
 % 4 = virus
 
+
+
 % CREATE PLOTS
 for i = 0                      % i = [0 1 2 3 4 5];
-    a = zeros(25,25);
+    N = zeros(25,25);
 for n1 = 10
-    a(randperm(numel(a), n1)) = i;
+    N(randperm(numel(N), n1)) = i;
 end
 end
+
+
+%% Denna sektion skapar en rad av nollor runt matrisen.
+disp(N);
+[rader, kolumner]=size(N);
+r=6*ones(rader, 1);
+k=6*ones(1,kolumner+2); % +2 f?r att matrisen ska g? ihopp
+% inramad a kallas N
+a=[r,N,r]; % r ?r nollramen ovan och under
+a=[k;a;k]; % k ?r Nollramens sidor
+
 
 for k = 1
 for n2 = 10
@@ -283,27 +296,5 @@ end
 %     liv=0;
 % end
 % end
-
-function Pos	=	Granne(a,r,k)
-[m,n]=size(a)
-			
-if r==1	&&	k==1    
-Pos = A(r+1,k) | A(r,k+1) | A(r+1,k+1)
-elseif r==m	&&	k==1	summa=A(r-1,k)+A(r,k+1)+A(r-1,k+1)
-elseif r==1	&&	k==n		summa=A(r,k-1)+A(r+1,k)+A(r+1,k-1)
-elseif r==m	&&	k==n	summa=A(r,k-1)+A(r-1,k)+A(r-1,k-1)
-			
-elseif r==1	&&	k>1	&&	k<n	summa=A(r,k-1)+A(r+1,k-1)+A(r+1,k)+A(r+1,k+1)+A(r,k+1)
-			
-elseif r==m	&&	k>1	&&	k<n	summa=A(r,k-1)+A(r-1,k-1)+A(r-1,k)+A(r-1,k+1)+A(r,k+1)
-			
-elseif r>1	&&	r<m	&&	k==1	summa=	A(r-1,k)+A(r-1,k+1)+A(r,k+1)+A(r+1,k+1)+A(r+1,k)
-			
-elseif r>1	&&	r<m	&&	k==n	summa=A(r-1,k)+A(r-1,k-1)+A(r,k-1)+A(r+1,k-1)+A(r+1,k)
-			
-else summa	=	A(r+1,k-1)+A(r+1,k+1)+A(r-1,k-1)+A(r-1,k+1)+A(r,k-1)+A(r,k+1)+A(r+1,k)+A(r-1,k)
-end
-end
-
 
 
