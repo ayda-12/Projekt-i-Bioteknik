@@ -1,4 +1,3 @@
-
 %% This section is for the game itself 
 % This section is for the game itself 
 % setting parameters
@@ -60,40 +59,45 @@ end
 end
 
 
-%% Denna sektion skapar en rad av nollor runt matrisen.
-disp(N);
-[rader, kolumner]=size(N);
-r=6*ones(rader, 1);
-k=6*ones(1,kolumner+2); % +2 f?r att matrisen ska g? ihopp
-% inramad a kallas N
-a=[r,N,r]; % r ?r nollramen ovan och under
-a=[k;a;k]; % k ?r Nollramens sidor
+
 
 
 for k = 1
 for n2 = 10
-a(randperm(numel(a), n2)) = k;
+N(randperm(numel(N), n2)) = k;
 end 
 end
 
 for l = 2
 for n3 = 10
-a(randperm(numel(a), n3)) = l; %For example, randperm(6) might be [2 4 5 6 1 3].
+N(randperm(numel(N), n3)) = l; %For example, randperm(6) might be [2 4 5 6 1 3].
 end
 end
 
 for m=3
 for n4 = 10
-a(randperm(numel(a), n4)) = m;
+N(randperm(numel(N), n4)) = m;
 end
 end
 
 for j=4
     for n5 = 5
-       a(randperm(numel(a), n5)) = j;
+       N(randperm(numel(N), n5)) = j;
     end
 end
 
+
+
+
+
+%% Denna sektion skapar en rad av nollor runt matrisen.
+disp(N)
+[rader, kolumner]=size(N);
+r=6*ones(rader, 1);
+k=6*ones(1,kolumner+2); % +2 f?r att matrisen ska g? ihopp
+% inramad a kallas N
+a=[r,N,r] % r ?r nollramen ovan och under
+a=[k;a;k] % k ?r Nollramens sidor
 
 % CREATE PLOTS
 figure(1)
@@ -102,7 +106,7 @@ imagesc(a)
 colormap hot
 colorbar 
 % grid
-i = 0; 
+% i = 0; 
 k = 1;
 l = 2;
 m = 3;
@@ -131,16 +135,16 @@ for j = 1
 end
 
 %% %% neighbours
-[x,y]= size(a);
+[x,y]= size(N);
 pos1 = a(x-1,y-1);
-pos2 = a(x-1,y);
-pos3 = a(x-1,y+1);
-pos4 = a(x,y-1);
-pos5 = a(x,y+1);
-pos6 = a(x+1,y-1);
-pos7 = a(x+1,y);
-pos8 = a(x+1,y+1);
-pos9 =  a(x,y); 
+pos2 = N(x-1,y);
+pos3 = N(x-1,y+1);
+pos4 = N(x,y-1);
+pos5 = N(x,y+1);
+pos6 = N(x+1,y-1);
+pos7 = N(x+1,y);
+pos8 = N(x+1,y+1);
+pos9 =  N(x,y); 
 q = [0,0.001,1]; 
 % function pos = neighbours(a,x,y)
 % pos= [pos1,pos2,pos3,pos4,pos5, pos6, pos7, pos8, pos9]; 
@@ -267,7 +271,7 @@ Subst6=[subst6;TL1(i,:)];
 end
 a(sub2ind(size(a),Subst6(:,1),Subst6(:,2)))= 1;
 
-end
+
 
 
 % n = neighbors(a,x,y); 
@@ -296,5 +300,3 @@ end
 %     liv=0;
 % end
 % end
-
-
