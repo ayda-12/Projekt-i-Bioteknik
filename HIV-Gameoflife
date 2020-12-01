@@ -108,7 +108,7 @@ Subst1=[subst1;T(i,:)];
 end
 a(sub2ind(size(a),Subst1(:,1),Subst1(:,2)))=1;
 
-
+% Growthrate
 [x2,j2]=find(a==1);
 T=[x2,j2];
 for j = 1
@@ -116,6 +116,7 @@ for j = 1
        a(randperm(numel(a), n5)) = j;
     end
 end
+
 %% %% neighbours
 [x,y]= size(a);
 pos1 = a(x-1,y-1);
