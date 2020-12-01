@@ -233,12 +233,25 @@ end
 [x5,j5]=find(a==4);  %find out the positions of the 4 in the matrix a 
 V=[x5,j5];
 r2=round(size(V)/10);  
-q5=randsample (1:length(TA),r2); 
+q5=randsample (1:length(V),r2); 
 subst5=[];
 for i=q5
 Subst5=[subst5;V(i,:)];
 end
 a(sub2ind(size(a),Subst5(:,1),Subst5(:,2)))= 0;
+
+end
+
+% TL-> T
+[x6,j6]=find(a==2);  %find out the positions of the 4 in the matrix a 
+TL1=[x6,j6];
+r3=round(size(TL1)/10);  % Ändra Medicin Term mycket och testa
+q6=randsample (1:length(TL1),r3); 
+subst6=[];
+for i=q6
+Subst6=[subst6;TL1(i,:)];
+end
+a(sub2ind(size(a),Subst6(:,1),Subst6(:,2)))= 1;
 
 end
 
